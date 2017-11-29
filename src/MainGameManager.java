@@ -47,7 +47,7 @@ public class MainGameManager extends PApplet {
 	}
 
 	public void gameStart(){
-		player = new Player(this, "pep.png", 7, 7, playermoveAmmount_X);
+		player = new Player(this, "../assets/pep.png", 7, 7, playermoveAmmount_X);
 		kB1 = new KillerBox(this, 0, 495, 90, 20, 20);
 		kB2 = new KillerBox(this, 1600, 100, 60, 50, 30);
 		kB3 = new KillerBox(this, 0, 450, 90, 20, 20);
