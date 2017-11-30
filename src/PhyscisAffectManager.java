@@ -35,23 +35,23 @@ public final class PhyscisAffectManager {
 		}
 	}
 	//TODO: Make this function within work in parallel
+	//TODO: perform a radius scan before checking the collision
 	//detect if the passed game object has collied with the level
 	//If so, the function will call each object OnCollision function 
 	public Boolean detectCollisionWithLevel(BasePhyscisGameObject obj, Level lvl)
 	{
-		//Will keep the running track of indexes passed by itr
-		//This is used when detecting which title the player has landed on
+		Point foundColP = null;
+		//Will keep the running track of indexes passed by itr. This is used when detecting which title the player has landed on.
 		int count = 0;
 		Iterator<CollisionBox> itr = lvl.col_boxes.publicGetColBoxes().iterator();
-		//TODO: maybe add an if statement to block the same collision until a move is done
-		Point foundColP = null;
+		
 		while(itr.hasNext() && foundColP == null){
 			foundColP  = obj.col.detectLevelCollision(itr.next());
 			
 			if(foundColP != null)
 			{			
 				//call each OnCollision function
-				obj.onCollision(foundColP, lvl.getClass().getSimpleName());
+				obj.onCollision(foundColP, lvl.id);
 				lvl.onCollisionLevel(foundColP, obj.id,count );
 			}
 			count++;
