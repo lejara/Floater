@@ -1,15 +1,15 @@
 # Floater
 A First Test Game Sharing
 
-Installation On Eclipse
+Building Using Eclipse IDE
 
-1. Get Egit. Help here : https://www.youtube.com/watch?v=ptK9-CNms98
+1. Get egit. How to here : https://www.youtube.com/watch?v=ptK9-CNms98
 
 2. Download Processing Library : https://www.processing.org/download/
 
 3. Clone Repo using egit help here: https://www.youtube.com/watch?v=ptK9-CNms98 
 
-4. Import processing core to your project
+4. Import processing core.js to your project
 
     In  Eclipse....
 
