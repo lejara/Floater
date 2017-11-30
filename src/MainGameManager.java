@@ -1,5 +1,4 @@
 import processing.core.PApplet;
-import utils.*;
 import gameObjects.KillerBox;
 import gameObjects.Player;
 
