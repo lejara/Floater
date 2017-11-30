@@ -1,13 +1,12 @@
 # Floater
-A First Test Game Sharing
-
-Building Using Eclipse IDE
+A Simple 2D platformer with its own engine. Made in Java. 
+## Building Using Eclipse IDE On Windows
 
 1. Get egit. How to here : https://www.youtube.com/watch?v=ptK9-CNms98
 
-2. Download Processing Library : https://www.processing.org/download/
+2. Clone Repo using egit and make a project help here: https://youtu.be/ptK9-CNms98?t=1m49s
 
-3. Clone Repo using egit help here: https://www.youtube.com/watch?v=ptK9-CNms98 
+3. Download Processing Library : https://www.processing.org/download/
 
 4. Import processing core.js to your project
 
@@ -15,9 +14,15 @@ Building Using Eclipse IDE
 
     File > Import > General > File System
 
-    Click next. On Windows, click "Browse..." and select the Processing jar files inside PATH_TO_PROCESSING/core/library/. On OS X, do not use the "Browse..." button. Instead, use the "From directory:" field to manually enter the path to Processing's jar files, which is typically /Applications/Processing 3.app/Contents/Java/core/library/. At minimum, select the "core.jar" file inside the "library" folder.
+    Click next. On Windows, click "Browse..." and select the Processing core.jar file inside PATH_TO_PROCESSING/core/library/. 
+    
+    Click Finish. If you look at the Package Explorer, you'll notice that there is a new file in our project, called 'core.jar'
+    
+5. Add core.jar to your build path
+    
+    Right click on the core.jar, go to Build Path, and then Add to Build Path
 
-5. Your done :)
+6. Your done :)
 
 
 IMPORTANT NOTE
