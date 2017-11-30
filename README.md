@@ -25,5 +25,5 @@ A Simple 2D platformer with its own engine. Made in Java.
 6. Your done :)
 
 
-IMPORTANT NOTE
-- ONLY  COMMIT ONLY SOURCE FILE CHANGES! DO NOT SUBMMIT A COMMIT THAT HAS ANY OF YOUR PROJECT DATA!
+## IMPORTANT NOTE
+- Only commit source files changes. Thx :3
