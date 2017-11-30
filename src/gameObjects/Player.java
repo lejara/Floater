@@ -20,24 +20,25 @@ public class Player extends  BasePhyscisGameObject{
   private int jumpCooldown = 400;
   private int curretMillsHold = 0;
   
-  boolean hasLanded;
+  
+  //if player has fallen off or got killed
   boolean hasDied;
-  public Player(PApplet p, String imageLocation, float w, float h, int moveAmo_X)
+  public Player(PApplet p, int moveAmo_X, int x_Start, int y_Start)
   {
 	parent = p;  
 	
 	id = "Player";
-	sprite_  = parent.loadImage(imageLocation);
+	sprite_  = parent.loadImage("../assets/pep.png");
 	
 	//start location
-	location = new Point(100, 800);
-	prev_Location = new Point(100, 800);
+	location = new Point(x_Start, y_Start);
+	prev_Location = new Point(x_Start, y_Start);
 	
 	velocityX = moveAmo_X;
 	//set size of player 
 	//TODO: make sure casting the size from float to int does not break the collision box size
-	size_W = (int)(sprite_.width/w);
-	size_H = (int)(sprite_.height/h);
+	size_W = (int)(sprite_.width/7);
+	size_H = (int)(sprite_.height/7);
 	//set collisionBox 
 	prev_col = new CollisionBox(prev_Location, null, size_W, size_H );
 	col = new CollisionBox(location, prev_col, size_W, size_H );
@@ -102,7 +103,7 @@ public class Player extends  BasePhyscisGameObject{
 		  curretMillsHold = parent.millis();
 	  }
   }
-  //Checks to see if the player has fallen off the level
+  //Checks to see if the player has fallen off the level or died
   public boolean checkPlayerHasFallen(){
 	  
 	  if(location.y > parent.height + 200 || hasDied){

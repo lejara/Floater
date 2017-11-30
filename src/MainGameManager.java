@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import utils.*;
 import gameObjects.KillerBox;
 import gameObjects.Player;
 
@@ -15,16 +16,18 @@ public class MainGameManager extends PApplet {
 	Level level;   		
 	Player player;
 	PhyscisAffectManager p;
-	//test
+	
+	//Testing of KillerBoxes
 	KillerBox kB1;
 	KillerBox kB2;
 	KillerBox kB3;
 	KillerBox kB4;
 	KillerBox kB5;
-	//end test
+	
 	char keyPressed1;
 	char keyPressed2;
 	char keyPressed3;
+	
 	int playermoveAmmount_X = 9;
 	public static void main(String[] args) 
 	{		
@@ -34,19 +37,17 @@ public class MainGameManager extends PApplet {
 	public void settings()
 	{
 		size(1920,1080);		
-		smooth(5);
 		//fullScreen();
 	}
 	
 	public void setup()
 	{  
 		frameRate(60);
-		
 		gameStart();
 	}
 
 	public void gameStart(){
-		player = new Player(this, "../assets/pep.png", 7, 7, playermoveAmmount_X);
+		player = new Player(this, playermoveAmmount_X, 50, 600);
 		kB1 = new KillerBox(this, 0, 495, 90, 20, 20);
 		kB2 = new KillerBox(this, 1600, 100, 60, 50, 30);
 		kB3 = new KillerBox(this, 0, 450, 90, 20, 20);
@@ -60,7 +61,9 @@ public class MainGameManager extends PApplet {
 	{
 		background(200,200,200);
 		
-		p.detectCollisionWithLevel(player, level);
+		if(!player.hasLanded)
+			p.detectCollisionWithLevel(player, level);
+		
 		player.movePlayer(keyPressed1, keyPressed2, keyPressed3);
 		//killer boxes move
 		kB1.move();
@@ -119,6 +122,7 @@ public class MainGameManager extends PApplet {
 	}
 	
 	public boolean CheckGameOverState(){
+		//if player has fallen then display the game over screen
 		if(player.checkPlayerHasFallen() == true){
 			//display faded screen
 			fill(0,0,0, 150);
@@ -134,6 +138,7 @@ public class MainGameManager extends PApplet {
 			if((mouseX > (width/2) - 200) && mouseX < (width/2) && mouseY > (height/2) && mouseY < (height/2) + 200){
 				fill(255,0,0);
 				if(mousePressed == true){
+					//restarts the game
 					restart();
 				}
 			}
@@ -146,6 +151,7 @@ public class MainGameManager extends PApplet {
 			if((mouseX > (width/2) + 100) && mouseX < (width/2) + 200 && mouseY > (height/2) && mouseY < (height/2) + 200){
 				fill(255,0,0);
 				if(mousePressed == true){
+					//close the game
 					exit();
 				}
 			}
@@ -170,8 +176,9 @@ public class MainGameManager extends PApplet {
 	}
 	
 	public void keyPressed(){
-		//Calls the player move function a either WASD is pressed
+		
 		//TODO: allow the rebind of keys
+		//Calls the player move function a either WASD is pressed
 		if( key == 'd' )
 		{
 			keyPressed1 = key;

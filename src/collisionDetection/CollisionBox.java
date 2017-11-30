@@ -17,42 +17,45 @@ public class CollisionBox {
 	
 	public Vector<Range> ranges;
 	
-	private int x_Offset;
-	private int y_Offset;
+	private int width;
+	private int height;
 	
-	public CollisionBox(Point p, CollisionBox prev_loc ,int x_offset, int y_offset)
+	public CollisionBox(Point p, CollisionBox prev_loc ,int w, int h)
 	{
 		objectLocation = p;
 		prev_location = prev_loc;
+		
+		width = w;
+		height = h;
+		
 		ranges = new Vector<Range>(4);
-		
-		topPointsRange = new Range( objectLocation, x_offset, y_offset, RangeType.TOP);
+		//set ranges and add them to the collection
+		topPointsRange = new Range( objectLocation, width, height, RangeType.TOP);
 		ranges.add(topPointsRange);
-		leftPointsRange = new Range( objectLocation, x_offset, y_offset, RangeType.LEFT);
+		leftPointsRange = new Range( objectLocation, width, height, RangeType.LEFT);
 		ranges.add(leftPointsRange);
-		rightPointsRange = new Range( objectLocation, x_offset, y_offset, RangeType.RIGHT);
+		rightPointsRange = new Range( objectLocation, width, height, RangeType.RIGHT);
 		ranges.add(rightPointsRange);
-		bottomPointsRange = new Range( objectLocation, x_offset, y_offset, RangeType.BOTTOM);
+		bottomPointsRange = new Range( objectLocation, width, height, RangeType.BOTTOM);
 		ranges.add(bottomPointsRange);
-		
-		x_Offset = x_offset;
-		y_Offset = y_offset;
 	}
 	
-	//Returns - null if no Collision is detected.  or an range type if there is a collision
+	//This function detect level collision by only detecting from the current object bottom range to the level's top range
+	//Returns - a null Point object if no Collision is detected, or a object Point populated with a detection point 
 	public Point detectLevelCollision (CollisionBox b){
 		Point detectionPoint = null;
 		int foundY = 0;
 		int foundX = 0;
-		//Focus is bottom and top range
+		//Current Object bottom range
 		int currentObjectRangeLeftPoint_Y = this.bottomPointsRange.getLeftPoint().y;
+		//Level Object top range
 		int otherObjectRangeLeftPoint_Y = b.topPointsRange.getLeftPoint().y;
 		//Find Y-axis collision. since this is a type (x- ranged, consent Y)		
 		if(( currentObjectRangeLeftPoint_Y >=  otherObjectRangeLeftPoint_Y) && (prev_location.bottomPointsRange.getLeftPoint().getY() <= otherObjectRangeLeftPoint_Y)){
 			foundY = otherObjectRangeLeftPoint_Y;
-			//find the first X-axis collision point
-			int currentObjectLocation_X = bottomPointsRange.getLeftPoint().x;
-			for(int i = 0; i < x_Offset && foundX == 0; i++){
+			//find only the  first X-axis collision point
+			int currentObjectLocation_X = this.bottomPointsRange.getLeftPoint().x;
+			for(int i = 0; i < width && foundX == 0; i++){
 				
 				int c_X = currentObjectLocation_X - i;
 				
@@ -67,17 +70,18 @@ public class CollisionBox {
 		}
 		return detectionPoint;
 	}
-	//Detect collision with other objects
-	///Overlapping collision type of detection
-	//Returns - null if no Collision is detected.  or an range type if there is a collision	
+
+	//Detect collision with other objects. Detection done by doing a overlapping check
+	//Returns - a null Point object if no Collision is detected, or a object Point populated with a detection point 
 	public Point detectCollision (CollisionBox b){
 		Point detectionPoint = null;
 		
 		Iterator<Range> itr_Current_Ranges = this.ranges.iterator();
+		//loops thru all ranges of the current object
 		while(itr_Current_Ranges.hasNext())
 		{
 			Point check_Point = itr_Current_Ranges.next().getLeftPoint();
-			
+			//detection is checked by checking all left points
 			if(((check_Point.x >= b.topPointsRange.getLeftPoint().x) && 
 				(check_Point.x <  b.bottomPointsRange.getLeftPoint().x)) &&
 				((check_Point.y > b.rightPointsRange.getLeftPoint().y) &&
