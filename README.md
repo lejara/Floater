@@ -1,6 +1,8 @@
 # Floater
 A Simple 2D platformer with its engine bits. Made in Java. 
+
 Uses the 2D Processing Library https://processing.org/
+
 ## Building Using Eclipse IDE On Windows
 
 1. Get egit. How to here : https://www.youtube.com/watch?v=ptK9-CNms98
