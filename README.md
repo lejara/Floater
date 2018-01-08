@@ -28,5 +28,3 @@ Uses the 2D Processing Library https://processing.org/
 6. Your done :)
 
 
-## IMPORTANT NOTE
-- Only commit source files changes. Thx :3
