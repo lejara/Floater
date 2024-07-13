@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProcessingBasic:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProcessingBasic_jar</output-path>
+    <root id="archive" name="ProcessingBasic.jar">
+      <element id="module-output" name="ProcessingBasic" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../processing-3.3.6-windows64/processing-3.3.6/core/library/core.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/assets" />
+    </root>
+  </artifact>
+</component>

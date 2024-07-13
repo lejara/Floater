@@ -1,48 +1,48 @@
 import processing.core.PApplet;
-import utils.*;
 import gameObjects.KillerBox;
 import gameObjects.Player;
 
 
-public class MainGameManager extends PApplet {
+public class Main extends PApplet {
 
+	int SPACE = 32;
 	int[][] TestDataOne = {
 	                 {1,1,0,0,1,0,1,0,1,3},
 	                 {1,0,0,0,0,0,0,0,0,0},
 	                 {1,0,0,1,0,0,1,1,0,1},
 	                 {0,0,0,0,0,0,0,0,1,0},
 	                 {0,0,0,0,1,0,0,1,0,0},
-	                 {1,0,1,1,0,0,0,0,0,0}}; 
-	Level level;   		
+	                 {1,0,1,1,0,0,0,0,0,0}};
+	Level level;
 	Player player;
 	PhyscisAffectManager p;
-	
+
 	//Testing of KillerBoxes
 	KillerBox kB1;
 	KillerBox kB2;
 	KillerBox kB3;
 	KillerBox kB4;
 	KillerBox kB5;
-	
+
 	char keyPressed1;
 	char keyPressed2;
 	char keyPressed3;
-	
+
 	int playermoveAmmount_X = 9;
-	public static void main(String[] args) 
-	{		
-		PApplet.main("MainGameManager");
+	public static void main(String[] args)
+	{
+		PApplet.main("Main");
 	}
-	
+
 	public void settings()
 	{
-		size(1920,1080);		
+		size(1920,1080);
 		//fullScreen();
 	}
-	
+
 	public void setup()
-	{  
-		frameRate(60);
+	{
+		frameRate(45);
 		gameStart();
 	}
 
@@ -59,11 +59,12 @@ public class MainGameManager extends PApplet {
 	}
 	public void draw()
 	{
+
 		background(200,200,200);
-		
+
 		if(!player.hasLanded)
 			p.detectCollisionWithLevel(player, level);
-		
+
 		player.movePlayer(keyPressed1, keyPressed2, keyPressed3);
 		//killer boxes move
 		kB1.move();
@@ -85,8 +86,8 @@ public class MainGameManager extends PApplet {
 		kB4.drawKillerBox();
 		kB5.drawKillerBox();
 		player.DrawPlayer();
-		
-		//affects 
+
+		//affects
 		p.Gravity();
 		//checks
 		if(CheckWinState())
@@ -96,10 +97,10 @@ public class MainGameManager extends PApplet {
 		}else{
 			CheckGameOverState();
 		}
-		
-		
+
+
 	}
-	
+
 	public boolean CheckWinState()
 	{
 		//only does a title hit for now
@@ -112,15 +113,15 @@ public class MainGameManager extends PApplet {
 			textSize(100);
 			fill(255, 255, 255);
 			text("You Win!", (width/2) - 200, height/2);
-			
-			
+
+
 			//TODO: add next level, restart etc more here
-			
+
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean CheckGameOverState(){
 		//if player has fallen then display the game over screen
 		if(player.checkPlayerHasFallen() == true){
@@ -131,8 +132,8 @@ public class MainGameManager extends PApplet {
 			textSize(100);
 			fill(255, 255, 255);
 			text("Restart?", (width/2) - 200, height/2);
-			
-			
+
+
 			textSize(80);
 			//checks if mouse is hovering over the yes text
 			if((mouseX > (width/2) - 200) && mouseX < (width/2) && mouseY > (height/2) && mouseY < (height/2) + 200){
@@ -146,7 +147,7 @@ public class MainGameManager extends PApplet {
 				fill(255, 255, 255);
 			}
 			text("Yes", (width/2) - 200,  (height/2) + 200, 80);
-			
+
 			//checks if mouse is hovering over the no text
 			if((mouseX > (width/2) + 100) && mouseX < (width/2) + 200 && mouseY > (height/2) && mouseY < (height/2) + 200){
 				fill(255,0,0);
@@ -163,7 +164,7 @@ public class MainGameManager extends PApplet {
 		}
 		return false;
 	}
-	
+
 	public void restart(){
 		player = null;
 		level = null;
@@ -174,9 +175,9 @@ public class MainGameManager extends PApplet {
 		kB4 = null;
 		gameStart();
 	}
-	
+
 	public void keyPressed(){
-		
+
 		//TODO: allow the rebind of keys
 		//Calls the player move function a either WASD is pressed
 		if( key == 'd' )
@@ -184,30 +185,31 @@ public class MainGameManager extends PApplet {
 			keyPressed1 = key;
 		}
 		if(key == 'a'){
-			
+
 			keyPressed2 = key;
 		}
-		else if(key == 'w')
+
+		if(keyCode == SPACE)
 		{
-			keyPressed3 = key;
+			keyPressed3 = 'w';
 		}
 	}
 	public void keyReleased(){
-		
+
 		if( key == 'd' )
 		{
 			keyPressed1 = 0;
 		}
 		if(key == 'a'){
-			
+
 			keyPressed2 = 0;
 		}
-		else if(key == 'w')
+		if(keyCode == SPACE)
 		{
 			keyPressed3 = 0;
 		}
 	}
-	
 
-	
+
+
 }
